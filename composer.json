@@ -1,0 +1,22 @@
+{
+  "name": "ozitag/tager-backend-administrators",
+  "description": "Base components for tager",
+  "license": "MIT",
+  "homepage": "https://github.com/ozitag/tager-backend-administrators",
+  "authors": [
+    {
+      "name": "Vital Ozierski <v.ozierski@ozitag.com>",
+      "email": "v.ozierski@ozitag.com",
+      "homepage": "https://ozitag.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "ozitag/tager-backend-admin": "^1.0",
+  },
+  "autoload": {
+    "psr-4": {
+      "OZiTAG\\Tager\\Backend\\Administrators\\": "src"
+    }
+  }
+}
