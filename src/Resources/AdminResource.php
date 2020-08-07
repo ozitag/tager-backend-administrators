@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Admin\Resources\Admin;
+namespace OZiTAG\Tager\Backend\Administrators\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
