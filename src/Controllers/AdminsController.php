@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Admin\Controllers;
+namespace OZiTAG\Tager\Backend\Administrators\Controllers;
 
 use Illuminate\Session\Store;
 use OZiTAG\Tager\Backend\Administrators\Features\DeleteAdminFeature;

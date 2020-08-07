@@ -3,7 +3,7 @@
 namespace OZiTAG\Tager\Backend\Administrators\Features;
 
 use Illuminate\Support\Facades\Auth;
-use OZiTAG\Tager\Backend\Admin\Repositories\AdministratorRepository;
+use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorRepository;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
 use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
 

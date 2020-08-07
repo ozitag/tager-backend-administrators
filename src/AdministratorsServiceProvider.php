@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Admin;
+namespace OZiTAG\Tager\Backend\Administrators;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +25,6 @@ class AdministratorsServiceProvider extends EventServiceProvider
      */
     public function boot()
     {
-
+        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
     }
 }

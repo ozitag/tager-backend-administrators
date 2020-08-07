@@ -4,7 +4,7 @@ namespace OZiTAG\Tager\Backend\Administrators\Features;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use OZiTAG\Tager\Backend\Admin\Repositories\AdministratorRepository;
+use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorRepository;
 use OZiTAG\Tager\Backend\Administrators\Requests\UpdateAdminRequest;
 use OZiTAG\Tager\Backend\Administrators\Resources\AdminResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;

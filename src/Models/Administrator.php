@@ -1,6 +1,6 @@
 <?php
 
-namespace OZiTAG\Tager\Backend\Admin\Models;
+namespace OZiTAG\Tager\Backend\Administrators\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
