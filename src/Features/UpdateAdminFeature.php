@@ -4,10 +4,12 @@ namespace OZiTAG\Tager\Backend\Administrators\Features;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use OZiTAG\Tager\Backend\Administrators\Events\AdminRolesUpdated;
 use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorRepository;
 use OZiTAG\Tager\Backend\Administrators\Requests\UpdateAdminRequest;
 use OZiTAG\Tager\Backend\Administrators\Resources\AdminResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UpdateAdminFeature extends Feature
 {
@@ -23,11 +25,7 @@ class UpdateAdminFeature extends Feature
         $admin = $repository->setById($this->id);
 
         if(!$admin) {
-            throw new \HttpException('Admin Not Found', 404);
-        }
-
-        if($admin->id === $this->user()->id) {
-            throw new \HttpException('Access Denied', 403);
+            throw new HttpException(404, 'Admin Not Found');
         }
 
         $repository->fillAndSave(
@@ -37,6 +35,12 @@ class UpdateAdminFeature extends Feature
                     $admin->password
             ])
         );
+
+        $changes = $admin->roles()->sync($request->get('roles'));
+
+        if($changes['attached'] || $changes['detached']) {
+            event(new AdminRolesUpdated($admin->id));
+        }
 
         return new AdminResource($admin);
     }

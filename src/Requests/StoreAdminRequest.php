@@ -13,6 +13,8 @@ class StoreAdminRequest extends FormRequest
             'name' => 'required|string',
             'password' => 'required|string|min:6',
             'email' => ['required', 'string', 'email', 'unique:tager_administrators,email'],
+            'roles' => 'array|nullable',
+            'roles.*' => 'integer|exists:tager_roles,id',
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace OZiTAG\Tager\Backend\Administrators\Features;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorRepository;
 use OZiTAG\Tager\Backend\Administrators\Requests\StoreAdminRequest;
@@ -19,10 +18,7 @@ class StoreAdminFeature extends Feature
             ])
         );
 
-
-        if(!$admin) {
-            return response('', 400);
-        }
+        $admin->roles()->sync($request->get('roles'));
 
         return new AdminResource($admin);
     }
