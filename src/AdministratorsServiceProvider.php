@@ -2,20 +2,14 @@
 
 namespace OZiTAG\Tager\Backend\Administrators;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider;
-use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Events\AccessTokenCreated;
-use Laravel\Passport\Token;
-use Laravel\Passport\Passport;
-use OZiTAG\Tager\Backend\Admin\Listeners\AdminAuthListener;
-use OZiTAG\Tager\Backend\Admin\Observers\TokenObserver;
-use OZiTAG\Tager\Backend\Auth\AuthServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-class AdministratorsServiceProvider extends EventServiceProvider
+class AdministratorsServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
+        $this->app->register(AdministratorsEventServiceProvider::class);
     }
 
     /**
