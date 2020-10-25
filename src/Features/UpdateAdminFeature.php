@@ -9,6 +9,8 @@ use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorRepository;
 use OZiTAG\Tager\Backend\Administrators\Requests\UpdateAdminRequest;
 use OZiTAG\Tager\Backend\Administrators\Resources\AdminResource;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
+use OZiTAG\Tager\Backend\Rbac\Facades\AccessControl;
+use OZiTAG\Tager\Backend\Rbac\Models\Role;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UpdateAdminFeature extends Feature
@@ -36,11 +38,14 @@ class UpdateAdminFeature extends Feature
             ])
         );
 
-        $changes = $admin->roles()->sync($request->get('roles'));
+        if(AccessControl::isNot($admin, Role::getSuperAdminRoleId())) {
+            $changes = $admin->roles()->sync($request->get('roles'));
 
-        if($changes['attached'] || $changes['detached']) {
-            event(new AdminRolesUpdated($admin->id));
+            if($changes['attached'] || $changes['detached']) {
+                event(new AdminRolesUpdated($admin->id));
+            }
         }
+
 
         return new AdminResource($admin);
     }
