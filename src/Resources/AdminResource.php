@@ -3,6 +3,9 @@
 namespace OZiTAG\Tager\Backend\Administrators\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
+use OZiTAG\Tager\Backend\Rbac\Facades\AccessControl;
+use OZiTAG\Tager\Backend\Rbac\Models\Role;
 
 class AdminResource extends JsonResource
 {
@@ -19,6 +22,8 @@ class AdminResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'roles' => AdminRoleResource::collection($this->roles),
+            'isSuperAdmin' => AccessControl::is($this->resource, Role::getSuperAdminRoleId()),
+            'isSelf' => $this->id == Auth::user()->id
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace OZiTAG\Tager\Backend\Administrators\Features;
 
+use Illuminate\Foundation\Auth\User;
 use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorRepository;
 use OZiTAG\Tager\Backend\Core\Features\Feature;
 use OZiTAG\Tager\Backend\Core\Resources\SuccessResource;
@@ -20,12 +21,19 @@ class DeleteAdminFeature extends Feature
 
     public function handle(AdministratorRepository $repository)
     {
+        $user = $this->user();
+
+        /** @var User $admin */
         $admin = $repository->find($this->id);
-        if(!$admin) {
+        if (!$admin) {
             throw new HttpException(404, 'Admin Not Found');
         }
 
-        if(AccessControl::is($admin, Role::getSuperAdminRoleId())) {
+        if ($admin->id == $user->id) {
+            throw new HttpException(403, 'It is forbidden to remove yourself');
+        }
+
+        if (AccessControl::is($admin, Role::getSuperAdminRoleId())) {
             throw new HttpException(403, 'Access Denied');
         }
 
