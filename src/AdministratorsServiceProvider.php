@@ -2,15 +2,19 @@
 
 namespace OZiTAG\Tager\Backend\Administrators;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider;
+use OZiTAG\Tager\Backend\Administrators\Enums\AdministratorsScope;
+use OZiTAG\Tager\Backend\Administrators\Events\AdminRolesUpdated;
+use OZiTAG\Tager\Backend\Administrators\Listeners\AdminRevokeAccessTokens;
+use OZiTAG\Tager\Backend\Rbac\TagerScopes;
 
-class AdministratorsServiceProvider extends ServiceProvider
+class AdministratorsServiceProvider extends EventServiceProvider
 {
-
-    public function register()
-    {
-        $this->app->register(AdministratorsEventServiceProvider::class);
-    }
+    protected $listen = [
+        AdminRolesUpdated::class => [
+            AdminRevokeAccessTokens::class,
+        ]
+    ];
 
     /**
      * Bootstrap any application services.
@@ -20,5 +24,12 @@ class AdministratorsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
+
+        TagerScopes::registerGroup('Administrators', [
+            AdministratorsScope::View => 'View administrators',
+            AdministratorsScope::Create => 'Create administrators',
+            AdministratorsScope::Edit => 'Edit administrators',
+            AdministratorsScope::Delete => 'Delete administrators'
+        ]);
     }
 }

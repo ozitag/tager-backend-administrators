@@ -7,7 +7,6 @@ use OZiTAG\Tager\Backend\Core\Jobs\Job;
 
 class RevokeAdminAccessTokensJob extends Job
 {
-
     protected int $id;
 
     /**
@@ -22,6 +21,7 @@ class RevokeAdminAccessTokensJob extends Job
     public function handle()
     {
         $id = $this->id;
+
         DB::update("UPDATE oauth_access_tokens SET revoked = 1 WHERE user_id = $id AND provider = 'administrators'");
     }
 }
