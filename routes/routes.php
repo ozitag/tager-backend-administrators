@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['passport:administrators', '
         Route::get('/admins', [AdminsController::class, 'index']);
         Route::get('/admins/{id}', [AdminsController::class, 'view']);
 
-        Route::post('/admins/create', [AdminsController::class, 'store'])->middleware([
+        Route::post('/admins', [AdminsController::class, 'store'])->middleware([
             AccessControlMiddleware::scopes(AdministratorsScope::Create)
         ]);
 
