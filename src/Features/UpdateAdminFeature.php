@@ -26,7 +26,7 @@ class UpdateAdminFeature extends Feature
     {
         $admin = $repository->setById($this->id);
 
-        if(!$admin) {
+        if (!$admin) {
             throw new HttpException(404, 'Admin Not Found');
         }
 
@@ -38,14 +38,11 @@ class UpdateAdminFeature extends Feature
             ])
         );
 
-        if(AccessControl::isNot($admin, Role::getSuperAdminRoleId())) {
-            $changes = $admin->roles()->sync($request->get('roles'));
+        $changes = $admin->roles()->sync($request->get('roles'));
 
-            if($changes['attached'] || $changes['detached']) {
-                event(new AdminRolesUpdated($admin->id));
-            }
+        if ($changes['attached'] || $changes['detached']) {
+            event(new AdminRolesUpdated($admin->id));
         }
-
 
         return new AdminResource($admin);
     }
