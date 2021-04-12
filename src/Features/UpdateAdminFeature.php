@@ -24,7 +24,8 @@ class UpdateAdminFeature extends Feature
 
     public function handle(UpdateAdminRequest $request, AdministratorRepository $repository)
     {
-        $admin = $repository->setById($this->id);
+        $admin = $repository->find($this->id);
+        $repository->set($admin);
 
         if (!$admin) {
             throw new HttpException(404, 'Admin Not Found');
