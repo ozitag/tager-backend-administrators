@@ -23,13 +23,14 @@ class AdministratorsServiceProvider extends EventServiceProvider
      */
     public function boot()
     {
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'tager-administrators');
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
-        TagerScopes::registerGroup('Administrators', [
-            AdministratorsScope::View => 'View administrators',
-            AdministratorsScope::Create => 'Create administrators',
-            AdministratorsScope::Edit => 'Edit administrators',
-            AdministratorsScope::Delete => 'Delete administrators'
+        TagerScopes::registerGroup(__('tager-administrators::scopes.group'), [
+            AdministratorsScope::View => __('tager-administrators::scopes.view_administrators'),
+            AdministratorsScope::Create => __('tager-administrators::scopes.create_administrators'),
+            AdministratorsScope::Edit => __('tager-administrators::scopes.edit_administrators'),
+            AdministratorsScope::Delete => __('tager-administrators::scopes.delete_administrators')
         ]);
     }
 }
