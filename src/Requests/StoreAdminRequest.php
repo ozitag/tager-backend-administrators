@@ -12,7 +12,7 @@ class StoreAdminRequest extends FormRequest
         return [
             'name' => 'required|string',
             'password' => 'required|string|min:6',
-            'email' => ['required', 'string', 'email', 'unique:tager_administrators,email'],
+            'email' => ['required', 'string', 'email', 'unique:tager_administrators,email,0,id,deleted_at,NULL'],
             'roles' => 'array|nullable',
             'roles.*' => 'integer|exists:tager_roles,id',
         ];

@@ -12,7 +12,7 @@ class UpdateAdminRequest extends FormRequest
         return [
             'name' => 'required|string',
             'password' => 'nullable|string|min:6',
-            'email' => ['required', 'string', 'email', 'unique:tager_administrators,email,' . (int) $this->id],
+            'email' => ['required', 'string', 'email', 'unique:tager_administrators,email,' . $this->route('id', 0) . ',id,deleted_at,NULL'],
             'roles' => 'array|nullable',
             'roles.*' => 'integer|exists:tager_roles,id',
         ];
