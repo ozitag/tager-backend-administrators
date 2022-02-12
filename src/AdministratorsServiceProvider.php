@@ -27,10 +27,10 @@ class AdministratorsServiceProvider extends EventServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
         TagerScopes::registerGroup(__('tager-administrators::scopes.group'), [
-            AdministratorsScope::View => __('tager-administrators::scopes.view_administrators'),
-            AdministratorsScope::Create => __('tager-administrators::scopes.create_administrators'),
-            AdministratorsScope::Edit => __('tager-administrators::scopes.edit_administrators'),
-            AdministratorsScope::Delete => __('tager-administrators::scopes.delete_administrators')
+            AdministratorsScope::View->value => __('tager-administrators::scopes.view_administrators'),
+            AdministratorsScope::Create->value => __('tager-administrators::scopes.create_administrators'),
+            AdministratorsScope::Edit->value => __('tager-administrators::scopes.edit_administrators'),
+            AdministratorsScope::Delete->value => __('tager-administrators::scopes.delete_administrators')
         ]);
     }
 }

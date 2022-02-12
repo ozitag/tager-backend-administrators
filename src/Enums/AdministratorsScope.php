@@ -2,12 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Administrators\Enums;
 
-use OZiTAG\Tager\Backend\Core\Enums\Enum;
-
-final class AdministratorsScope extends Enum
+enum AdministratorsScope: string
 {
-    const View = 'administrators.view';
-    const Create = 'administrators.create';
-    const Edit = 'administrators.edit';
-    const Delete = 'administrators.delete';
+    case View = 'administrators.view';
+    case Create = 'administrators.create';
+    case Edit = 'administrators.edit';
+    case Delete = 'administrators.delete';
 }
