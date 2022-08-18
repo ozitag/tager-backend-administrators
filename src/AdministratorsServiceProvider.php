@@ -24,7 +24,7 @@ class AdministratorsServiceProvider extends EventServiceProvider
     public function boot()
     {
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'tager-administrators');
-        
+
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
 
         TagerScopes::registerGroup(__('tager-administrators::scopes.group'), [
@@ -33,7 +33,5 @@ class AdministratorsServiceProvider extends EventServiceProvider
             AdministratorsScope::Edit->value => __('tager-administrators::scopes.edit_administrators'),
             AdministratorsScope::Delete->value => __('tager-administrators::scopes.delete_administrators')
         ]);
-
-        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
     }
 }

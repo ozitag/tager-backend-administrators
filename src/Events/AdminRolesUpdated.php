@@ -12,7 +12,8 @@ class AdminRolesUpdated
         $this->adminId = $adminId;
     }
 
-    public function getAdminId() {
+    public function getAdminId()
+    {
         return $this->adminId;
     }
 }

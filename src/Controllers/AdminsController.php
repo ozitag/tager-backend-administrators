@@ -2,28 +2,16 @@
 
 namespace OZiTAG\Tager\Backend\Administrators\Controllers;
 
-use App\Admin\Services\Operations\CreateOrUpdateServiceOperation;
-use App\Admin\Services\Requests\ServiceRequest;
-use App\Models\Service;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use OZiTAG\Tager\Backend\Admin\Models\Administrator;
-use OZiTAG\Tager\Backend\Admin\Models\AdministratorRole;
-use OZiTAG\Tager\Backend\Administrators\Features\DeleteAdminFeature;
+use OZiTAG\Tager\Backend\Admin\Models\AdministratorField;
+use OZiTAG\Tager\Backend\Admin\Repositories\AdministratorFieldRepository;
+use OZiTAG\Tager\Backend\Admin\Repositories\AdministratorRepository;
+use OZiTAG\Tager\Backend\Admin\Utils\TagerAdminConfig;
 use OZiTAG\Tager\Backend\Administrators\Features\FieldsAdminFeature;
-use OZiTAG\Tager\Backend\Administrators\Features\ListAdminFeature;
-use OZiTAG\Tager\Backend\Administrators\Features\StoreAdminFeature;
-use OZiTAG\Tager\Backend\Administrators\Features\UpdateAdminFeature;
-use OZiTAG\Tager\Backend\Administrators\Features\ViewAdminFeature;
-use OZiTAG\Tager\Backend\Administrators\Models\AdministratorField;
 use OZiTAG\Tager\Backend\Administrators\Operations\StoreOrUpdateAdministratorOperation;
-use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorFieldRepository;
-use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorRepository;
 use OZiTAG\Tager\Backend\Administrators\Requests\StoreOrUpdateAdminRequest;
-use OZiTAG\Tager\Backend\Administrators\Resources\AdminRoleResource;
-use OZiTAG\Tager\Backend\Administrators\Utils\TagerAdministratorsConfig;
-use OZiTAG\Tager\Backend\Core\Controllers\Controller;
-use OZiTAG\Tager\Backend\Crud\Actions\IndexAction;
 use OZiTAG\Tager\Backend\Crud\Actions\StoreOrUpdateAction;
 use OZiTAG\Tager\Backend\Crud\Controllers\AdminCrudController;
 use OZiTAG\Tager\Backend\Rbac\Facades\AccessControl;
@@ -85,7 +73,7 @@ class AdminsController extends AdminCrudController
                     $data[$dbField->field] = $dbField->value;
                 }
 
-                $fields = TagerAdministratorsConfig::getFields();
+                $fields = TagerAdminConfig::getFields();
                 $result = [];
 
                 foreach ($fields as $fieldName => $field) {

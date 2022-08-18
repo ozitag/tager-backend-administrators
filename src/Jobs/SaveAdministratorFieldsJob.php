@@ -2,12 +2,10 @@
 
 namespace OZiTAG\Tager\Backend\Administrators\Jobs;
 
-use Illuminate\Support\Facades\DB;
 use OZiTAG\Tager\Backend\Admin\Models\Administrator;
-use OZiTAG\Tager\Backend\Administrators\Repositories\AdministratorFieldRepository;
-use OZiTAG\Tager\Backend\Administrators\Utils\TagerAdministratorsConfig;
+use OZiTAG\Tager\Backend\Admin\Repositories\AdministratorFieldRepository;
+use OZiTAG\Tager\Backend\Admin\Utils\TagerAdminConfig;
 use OZiTAG\Tager\Backend\Core\Jobs\Job;
-use OZiTAG\Tager\Backend\Settings\Utils\TagerSettingsConfig;
 
 class SaveAdministratorFieldsJob extends Job
 {
@@ -33,7 +31,7 @@ class SaveAdministratorFieldsJob extends Job
 
             if (is_null($name) || is_null($value)) continue;
 
-            $field = TagerAdministratorsConfig::getField($name);
+            $field = TagerAdminConfig::getField($name);
             if (!$field) {
                 continue;
             }
@@ -42,7 +40,7 @@ class SaveAdministratorFieldsJob extends Job
             $type->setValue($value);
 
             if (!empty($type->hasFiles())) {
-                $scenario = TagerSettingsConfig::getFieldScenario($field->getMetaParamValue('scenario'));
+                $scenario = $field->getMetaParamValue('scenario');
                 if (!empty($scenario)) {
                     $type->applyFileScenario($scenario);
                 }
