@@ -12,6 +12,6 @@ class AdminRevokeAccessTokens
      */
     public function handle(AdminRolesUpdated $event)
     {
-        dispatch_now(new RevokeAdminAccessTokensJob($event->getAdminId()));
+        dispatch_sync(new RevokeAdminAccessTokensJob($event->getAdminId()));
     }
 }
